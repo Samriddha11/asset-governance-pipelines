@@ -1,0 +1,31 @@
+
+#Pipeline 1 - List pipeline
+aws-list-unattached-ebs
+    sendTagApproval
+        createApprovalBody
+        tagApproval
+    tagEbs
+        tagEbs
+#Rules
+aws-list-unattached-ebs
+aws-tag-unattached-ebs
+
+
+#Pipeline 2 - Delete Pipeline
+
+aws-delete-unattached-ebs
+    sendDeleteApproval
+        createDeleteApproval
+        deleteApproval
+    deleteEBS   
+        deleteEBS
+
+
+aws-initiate-delete-ebs
+aws-delete-unattached-ebs
+
+
+#Pipeline Trigger inputs 
+<+trigger.header['account-id']>
+<+trigger.header['region']>
+<+eventPayload>

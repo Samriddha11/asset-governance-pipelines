@@ -1,0 +1,11 @@
+policies:
+  - name: ebs-unattached-mark-for-delete
+    resource: ebs
+    comments: |
+      List any unattached EBS volumes and tag them with 'marked-for-delete:yes'.
+    filters:
+      - Attachments: []
+    actions:
+      - type: tag
+        key: marked-for-delete
+        value: "yes"

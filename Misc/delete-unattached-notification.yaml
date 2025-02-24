@@ -1,0 +1,15 @@
+policies:
+  - name: delete-unattached-notification
+    resource: ebs
+    comments: |
+      Delete unattached EBS volumes that are marked for deletion
+    filters:
+      - Attachments: []
+    actions:
+      - type: webhook
+        url: <https://app.harness.io/gateway/pipeline/api/webhook/custom/0Xz5Q6UeQZS2JiAO89EiDA/v3?accountIdentifier=SxuV0ChbRqWGSYClFlMQMQ&orgIdentifier=default&projectIdentifier=default_project&pipelineIdentifier=deleteebsvolumes&triggerIdentifier=deleteebstrigger>
+        batch: true
+        body: resources
+        headers:
+          account-id: account_id
+          region: region

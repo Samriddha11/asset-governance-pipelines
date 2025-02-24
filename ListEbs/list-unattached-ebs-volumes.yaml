@@ -1,0 +1,15 @@
+policies:
+  - name: ebs-unattached-list
+    resource: ebs
+    comments: |
+      List any unattached EBS volumes and send only their VolumeId in the webhook body.
+    filters:
+      - Attachments: []
+    actions:
+      - type: webhook
+        url: <Paste URL here>
+        batch: true
+        body: resources
+        headers:
+          account-id: account_id
+          region: region
